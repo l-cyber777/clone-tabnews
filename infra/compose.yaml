@@ -1,7 +1,12 @@
+#Define os serviços que o Docker vai subir
 services:
+  #Serviço do banco de dados
   database:
+    #Imagem ofical do PostgreSQL versão 16
     image: "postgres:16.0-alpine3.18"
-    environment:
-      POSTGRES_PASSWORD: "local_password"
+    #Carrega as variáveis de ambiente do arquivo .env
+    env_file:
+      - ../.env
+    #Mapeia a porta do container para máquina local
     ports:
       - "5432:5432"

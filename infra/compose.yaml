@@ -6,7 +6,7 @@ services:
     image: "postgres:16.0-alpine3.18"
     #Carrega as variáveis de ambiente do arquivo .env
     env_file:
-      - ../.env
+      - ../.env.development
     #Mapeia a porta do container para máquina local
     ports:
       - "5432:5432"

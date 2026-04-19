@@ -1,6 +1,6 @@
 // Importa o módulo database.js que criamos em infra/
 // Os "../../../.." sobem 4 pastas até chegar na raiz do projeto
-import database from "../../../../infra/database.js";
+import database from "infra/database.js";
 
 // Função principal do endpoint /api/v1/status
 // Recebe a requisição (request) e envia a resposta (response)

@@ -5,15 +5,24 @@ import database from "infra/database.js";
 // Função principal do endpoint /api/v1/status
 // Recebe a requisição (request) e envia a resposta (response)
 async function status(request, response) {
-  // Envia uma query para o banco de dados e aguarda o resultado
-  // "as sum" dá um nome amigável para o resultado da soma
-  const result = await database.query("SELECT 1 + 1 as sum;");
+  const updatedAt = new Date().toISOString();
 
-  // Mostra o resultado no terminal (útil para debug)
-  console.log(result);
+  // Busca a versão do PostgreSQL com uma query SQL
+  const databaseVersionResult = await database.query("SHOW server_version;");
+
+  // Pega o valor da versão do resultado
+  const databaseVersionValue = databaseVersionResult.rows[0].server_version;
 
   // Responde com status 200 (OK) e um JSON com uma mensagem
-  response.status(200).json({ chave: "são acima da médiaddede" });
+  response.status(200).json({
+    updated_at: updatedAt,
+    dependecies: {
+      database: {
+        version: databaseVersionValue,
+      },
+    },
+  });
 }
+
 // Exporta a função para o Next.js conseguir usar como endpoint
 export default status;

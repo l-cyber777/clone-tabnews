@@ -13,12 +13,19 @@ async function status(request, response) {
   // Pega o valor da versão do resultado
   const databaseVersionValue = databaseVersionResult.rows[0].server_version;
 
+  const databaseMaxConnectionsResult = await database.query(
+    "SHOW max_connections;",
+  );
+  const databaseMaxConnetionsValue =
+    databaseMaxConnectionsResult.rows[0].max_connections;
+
   // Responde com status 200 (OK) e um JSON com uma mensagem
   response.status(200).json({
     updated_at: updatedAt,
     dependecies: {
       database: {
         version: databaseVersionValue,
+        max_connections: parseInt(databaseMaxConnetionsValue),
       },
     },
   });

@@ -1,12 +1,19 @@
-#Define os serviços que o Docker vai subir
+# Defines the services that Docker will start
+# Define os serviços que o Docker vai subir
 services:
-  #Serviço do banco de dados
+  # Database service
+  # Serviço do banco de dados
   database:
-    #Imagem ofical do PostgreSQL versão 16
+    # Official PostgreSQL version 16 image
+    # Imagem oficial do PostgreSQL versão 16
     image: "postgres:16.0-alpine3.18"
-    #Carrega as variáveis de ambiente do arquivo .env
+
+    # Loads the environment variables from the .env.development file
+    # Carrega as variáveis de ambiente do arquivo .env.development
     env_file:
       - ../.env.development
-    #Mapeia a porta do container para máquina local
+
+    # Maps the container port to the local machine
+    # Mapeia a porta do container para a máquina local
     ports:
       - "5432:5432"

@@ -1,22 +1,40 @@
+// Imports the official PostgreSQL driver for Node.js
 // Importa o Client do driver oficial do PostgreSQL para Node.js
 import { Client } from "pg";
 
+// Function that executes any query on the database
 // Função que executa qualquer query no banco de dados
 async function query(queryObject) {
+  // Creates a new connection with the local database settings
   // Cria uma nova conexão com as configurações do banco local
   const client = new Client({
-    host: process.env.POSTGRES_HOST, // endereço do banco (nossa máquina)
-    port: process.env.POSTGRES_PORT, // porta padrão do PostgreSQL
-    user: process.env.POSTGRES_USER, // usuário padrão
-    database: process.env.POSTGRES_DB, // nome do banco
-    password: process.env.POSTGRES_PASSWORD, // senha definida no compose.yaml
+    host: process.env.POSTGRES_HOST, // database address / endereço do banco
+    port: process.env.POSTGRES_PORT, // default PostgreSQL port / porta padrão do PostgreSQL
+    user: process.env.POSTGRES_USER, // default user / usuário padrão
+    database: process.env.POSTGRES_DB, // database name / nome do banco
+    password: process.env.POSTGRES_PASSWORD, // password defined in compose.yaml / senha definida no compose.yaml
   });
-  await client.connect(); // abre a conexão com o banco
-  const result = await client.query(queryObject); // executa a query
-  await client.end(); // fecha a conexão após usar (boa prática!)
-  return result; // devolve o resultado para quem chamou
+
+  try {
+    // Opens the connection with the database
+    // Abre a conexão com o banco
+    await client.connect();
+
+    // Executes the query and returns the result
+    // Executa a query e retorna o resultado
+    const result = await client.query(queryObject);
+    return result;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  } finally {
+    // Always closes the connection — even if an error occurs!
+    // Sempre fecha a conexão — mesmo se ocorrer um erro!
+    await client.end();
+  }
 }
 
+// Exports the query function to be used in other files
 // Exporta a função query para ser usada em outros arquivos
 export default {
   query: query,

@@ -13,6 +13,7 @@ async function query(queryObject) {
     user: process.env.POSTGRES_USER, // default user / usuário padrão
     database: process.env.POSTGRES_DB, // database name / nome do banco
     password: process.env.POSTGRES_PASSWORD, // password defined in compose.yaml / senha definida no compose.yaml
+    ssl: process.env.NODE_ENV === "production" ? true : false,
   });
 
   try {

@@ -21,7 +21,7 @@ test("GET to /api/v1/status should return 200", async () => {
   // Verifica se o updated_at é uma data válida no formato ISO 8601
   expect(responseBody.updated_at).toEqual(parseUpdatedAt);
 
-  // Checks if the database version is "16.0"
+  // Checks if the database version is  "16.0"
   // Verifica se a versão do banco de dados é "16.0"
   expect(responseBody.dependencies.database.version).toEqual("16.0");
 

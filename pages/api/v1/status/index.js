@@ -40,6 +40,7 @@ async function status(request, response) {
   // Pega a contagem de conexões abertas do resultado
   const databaseOpenedConnectionsValue =
     databaseOpenedConnectionsResult.rows[0].count;
+  nprun;
 
   // Responds with status 200 (OK) and a JSON with the database info
   // Responde com status 200 (OK) e um JSON com as informações do banco

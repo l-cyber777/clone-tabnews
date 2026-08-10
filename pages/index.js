@@ -4,10 +4,7 @@ function Home() {
   return (
     // HTML structure of the page
     // Estrutura HTML da página
-    <h1>
-      Isabella Perejon, eu amo você. Se você me ama da uma risadinha e manda uma
-      foto sorrindo! 😀
-    </h1>
+    <h1>clone-tabnews</h1>
   );
 }
 

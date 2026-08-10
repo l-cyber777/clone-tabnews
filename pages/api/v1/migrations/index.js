@@ -16,7 +16,7 @@ export default async function migrations(request, response) {
     // Any other HTTP method (PUT, DELETE, PATCH...) is rejected with 405
     // Qualquer outro método HTTP (PUT, DELETE, PATCH...) é rejeitado com 405
     return response.status(405).json({
-      error: `Method "${request.method}" not alowed`,
+      error: `Method "${request.method}" not allowed`,
     });
   }
 
